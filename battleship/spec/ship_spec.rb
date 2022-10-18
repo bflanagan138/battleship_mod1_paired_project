@@ -22,42 +22,29 @@ RSpec.describe Ship do
     cruiser.hit
 
     expect(cruiser.health).to eq(2)
-
     cruiser.hit
-
     expect(cruiser.health).to eq(1)
-
   end
 
   it 'it is not sunk' do
     cruiser = Ship.new("Cruiser", 3)
 
     expect(cruiser.sunk?).to eq(false)
-
     cruiser.hit
-
     expect(cruiser.sunk?).to eq(false)
-
     cruiser.hit
-
     expect(cruiser.sunk?).to eq(false)
   end
 
-  it 'it will sink' do
+  it 'it can sink when hit as many times as it is long' do
     cruiser = Ship.new("Cruiser", 3)
 
     expect(cruiser.sunk?).to eq(false)
-
     cruiser.hit
-
     expect(cruiser.sunk?).to eq(false)
-
     cruiser.hit
-
     expect(cruiser.sunk?).to eq(false)
-
     cruiser.hit
-
     expect(cruiser.sunk?).to eq(true)
     end
 end
