@@ -4,8 +4,15 @@ class Cell
   def initialize(coordinate)
     @coordinate = coordinate
   end
-# check to see if the coordinate has a ship on it
+
   def ship
-    
+  end
+  
+  def empty?
+    if @ship == nil
+      true
+    else
+      false
+    end
   end
 end
