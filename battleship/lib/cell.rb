@@ -29,7 +29,7 @@ class Cell
    end
 
 
-   def fire_upon 
+   def fire_upon
       @fired_upon = true
       if empty? == false
         ship.hit
@@ -40,7 +40,7 @@ class Cell
 #if not empty and not fired upon 'S'
 #if not empty and fired upon 'H'
 #if fired upon and ship sunk 'X'
-   def render(*option)
+   def render(kwargs = false)
       if @fired_upon == false && empty? == true
         '.'
       elsif @fired_upon == true && empty? == true
@@ -49,7 +49,7 @@ class Cell
         'H'
       elsif @fired_upon == true && empty? == false && @ship.sunk?
         'X'
-      else (option)
+      else kwargs = true && empty? == false
         'S'
       end
    end
