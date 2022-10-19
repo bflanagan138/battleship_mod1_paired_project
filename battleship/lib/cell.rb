@@ -29,7 +29,7 @@ class Cell
    end
 
 
-   def fire_upon 
+   def fire_upon
       @fired_upon = true
       if empty? == false
         ship.hit
@@ -40,21 +40,20 @@ class Cell
 #if not empty and not fired upon 'S'
 #if not empty and fired upon 'H'
 #if fired upon and ship sunk 'X'
-   def render(option = false)
-    # require 'pry'; binding.pry
-      if option == false && @fired_upon == true && empty? == true
-        'M'
-      elsif option == false && @fired_upon == false 
-        '.'
-      elsif option == false && @fired_upon == true && @ship.sunk? == false
-        'H'
-      elsif @ship.sunk?
-        'X' 
-      else option == true && empty? == false
-        'S'
-        #require 'pry'; binding.pry
-      end
-   end
-
+def render(option = false)
+# require 'pry'; binding.pry
+  if option == false && @fired_upon == true && empty? == true
+    'M'
+  elsif option == false && @fired_upon == false
+    '.'
+  elsif option == false && @fired_upon == true && @ship.sunk? == false
+    'H'
+  elsif @ship.sunk?
+    'X'
+  else option == true && empty? == false
+    'S'
+    #require 'pry'; binding.pry
+  end
+end
 
 end
