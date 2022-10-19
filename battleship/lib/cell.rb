@@ -40,17 +40,17 @@ class Cell
 #if not empty and not fired upon 'S'
 #if not empty and fired upon 'H'
 #if fired upon and ship sunk 'X'
-   def render(*bool)
-      if @fired_upon == true && empty? == false && ship.health == 0
-        'X'
-      elsif @fired_upon == true && empty? == false
-        'H'
+   def render(*option)
+      if @fired_upon == false && empty? == true
+        '.'
       elsif @fired_upon == true && empty? == true
         'M'
-      elsif @fired_upon == false && empty? == false && (bool)
+      elsif @fired_upon == true && empty? == false
+        'H'
+      elsif @fired_upon == true && empty? == false && @ship.sunk?
+        'X'
+      else (option)
         'S'
-      else
-        '.'
       end
    end
 
