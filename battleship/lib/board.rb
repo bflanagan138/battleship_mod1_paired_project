@@ -29,9 +29,9 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.length && coordinates.each_cons(ship.length) do |coordinate|
-      coordinate 
-    end
-    binding.pry
+    ship.length == coordinates.length && valid_l = coordinates.sort {|a, b| a <=> b}
+    valid_l == coordinates 
+
+    #binding.pry
   end
 end
