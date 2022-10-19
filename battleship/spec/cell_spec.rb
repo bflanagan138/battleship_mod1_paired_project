@@ -68,10 +68,11 @@ RSpec.describe Cell do
   end
 
   it 'can render a ship' do
-    cell = Cell.new('B4')
+    cell_1 = Cell.new('B4')
     cruiser = Ship.new("Cruiser", 3)
-    cell.place_ship(cruiser)
-
-    expect(cell_1.render).to eq ('S')
+    cell_1.place_ship(cruiser)
+    expect(cell_1.render(true)).to eq ('S')
+    cell_1.fire_upon
+    expect(cell_1.render).to eq ('H')
   end
 end
