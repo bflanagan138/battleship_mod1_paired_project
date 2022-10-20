@@ -24,8 +24,14 @@ class Board
     }
   end
 
-  def valid_coordinate?(coord)
-    cells.has_key?(coord)
+  def valid_coordinate?(ship, coordinates)
+    if coordinates.class == Array
+      coord = coordinates.slice(ship.coordinates)
+      require 'pry'; binding.pry
+        coord.each { |coordinate| cells.has_key?(coordinate) }
+    elsif coordinates.class == String
+      cells.has_key?(coordinates)
+    end
   end
 
   def coordinate_order?(coordinates) #comeback dont think needed ????
@@ -47,13 +53,14 @@ class Board
   def horizontal_or_vertical?(coordinates)
     if letter_same?(coordinates) || number_same?(coordinates)
     coordinates.each_cons(2).all? {|coordinate| coordinate[1][1].to_i - coordinate[0][1].to_i == 1 }
-     true
+      true
     else
       false
     end
   end
 
   def valid_placement?(ship, coordinates)
-    horizontal_or_vertical?(coordinates) && ship.length == coordinates.length && coordinate_order?(coordinates)
+    horizontal_or_vertical?(coordinates) && ship.length == coordinates.length && coordinate_order?(coordinates) && valid_coordinate?(coordinates)
+  # require 'pry'; binding.pry
   end
 end
