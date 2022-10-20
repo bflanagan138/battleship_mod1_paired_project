@@ -24,11 +24,11 @@ class Board
     }
   end
 
-  def valid_coordinate?(ship, coordinates)
+  def valid_coordinate?(coordinates)
     if coordinates.class == Array
-      coord = coordinates.slice(ship.coordinates)
-      require 'pry'; binding.pry
-        coord.each { |coordinate| cells.has_key?(coordinate) }
+        coordinates.map.all? {|coord| cells.has_key?(coord)}
+      #require 'pry'; binding.pry
+        #coord.each { |coordinate| cells.has_key?(coordinate) }
     elsif coordinates.class == String
       cells.has_key?(coordinates)
     end
@@ -50,17 +50,43 @@ class Board
     numbers.uniq.length == 1
   end
 
-  def horizontal_or_vertical?(coordinates)
-    if letter_same?(coordinates) || number_same?(coordinates)
-    coordinates.each_cons(2).all? {|coordinate| coordinate[1][1].to_i - coordinate[0][1].to_i == 1 }
-      true
-    else
+  def horizontal?(coordinates)
+    if letter_same?(coordinates)
+      # binding.pry
+      coordinates.each_cons(2).all? do |coordinate|
+       coordinate[1][1].to_i - coordinate[0][1].to_i == 1
+      end
+    elsif !letter_same?(coordinates)
       false
     end
   end
 
+  def vertical?(coordinates)
+    if number_same?(coordinates)
+      # binding.pry
+      coordinates.each_cons(2).all? do |coordinate|
+        coordinate[1].ord - coordinate[0].ord == 1
+      end
+    elsif !number_same?(coordinates)
+      false
+    end
+  end
+  def horizontal_or_vertical?(coordinates)
+    #binding.pry
+     horizontal?(coordinates) || vertical?(coordinates)
+  end
+  #   if letter_same?(coordinates)
+  #   coordinates.each_cons(2).all? {|coordinate| coordinate[1][1].to_i - coordinate[0][1].to_i == 1 }
+  #     true
+  #   elsif number_same?(coordinates)
+  #     coordinates.each_cons(2).all? {|coordinate| coordinate[1].ord - coordinate[0].ord == 1 }
+  #   else
+  #     false
+  #   end
+  # end
+
   def valid_placement?(ship, coordinates)
     horizontal_or_vertical?(coordinates) && ship.length == coordinates.length && coordinate_order?(coordinates) && valid_coordinate?(coordinates)
-  # require 'pry'; binding.pry
-  end
+   #require 'pry'; binding.pry
+ end
 end
