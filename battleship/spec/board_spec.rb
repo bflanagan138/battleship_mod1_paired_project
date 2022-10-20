@@ -25,19 +25,18 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-    # expect(board.valid_coordinate?("A1")).to eq(true)
-    # expect(board.valid_coordinate?("D4")).to eq(true)
-    # expect(board.valid_coordinate?("A5")).to eq(false)
-    # expect(board.valid_coordinate?("E1")).to eq(false)
-    # expect(board.valid_coordinate?("A22")).to eq(false)
-    expect(board.valid_coordinate?(submarine, ["A1", "A2"])).to be (true)
-    expect(board.valid_coordinate?(cruiser, ["B1", "C1", "D1"])).to be (true)
+
+    expect(board.valid_coordinate?("A1")).to eq(true)
+    expect(board.valid_coordinate?("D4")).to eq(true)
+    expect(board.valid_coordinate?("A5")).to eq(false)
+    expect(board.valid_coordinate?("E1")).to eq(false)
+    expect(board.valid_coordinate?("A22")).to eq(false)
+    expect(board.valid_coordinate?( ["A1", "A2"])).to be (true)
+    expect(board.valid_coordinate?( ["B1", "C1", "D1"])).to be (true)
   end
 
   it 'has the same letter for all coordinates' do
     board = Board.new
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
 
     expect(board.letter_same?(["A1","A2"])).to eq (true)
     expect(board.letter_same?(["A1","B1"])).to eq (false)
@@ -88,5 +87,26 @@ RSpec.describe Board do
   expect(board.horizontal_or_vertical?(["A1", "B2", "C3"])).to be(false)
   expect(board.horizontal_or_vertical?(["A1", "A2", "A3"])).to be(true)
   expect(board.horizontal_or_vertical?(["A1", "B1", "C1"])).to be(true)
+  end
+
+  it 'is horizontal' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    expect(board.horizontal?(["A1", "A2", "A3"])).to eq (true)
+    expect(board.horizontal?(["A1", "A2", "A4"])).to eq (false)
+    expect(board.horizontal?(["A1", "B2", "C3"])).to be(false)
+
+  end
+
+  it 'is vertical' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    expect(board.vertical?(["A1", "B1", "C1"])).to eq (true)
+    expect(board.vertical?(["A1", "B1", "D1"])).to eq (false)
+    expect(board.vertical?(["A1", "B2", "C3"])).to be(false)
   end
 end
