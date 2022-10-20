@@ -33,19 +33,27 @@ class Board
     valid_l = coordinates.sort {|a, b| a <=> b}
     valid_l == coordinates
   end
+  
+  def letter_same?(coordinates)
+    letters = coordinates.map { |coordinate| coordinate[0] }
+    letters.uniq.length == 1
+  end
 
-  def lateral_placement?(coordinates)
+  def number_same?(coordinates)
+    numbers = coordinates.map {|coordinate| coordinate[1]}
+    numbers.uniq.length == 1
+  end
 
-    if coordinates.all? {|coordinate| coordinate[0] } &&
-       coordinates.each_cons(2).all? {|coordinate| coordinate[1][1].to_i - coordinate[0][1].to_i == 1 }
-       true
-     else
-       false
-     end
-
+  def horizontal_or_vertical?(coordinates)
+    if letter_same?(coordinates) || number_same?(coordinates)
+    coordinates.each_cons(2).all? {|coordinate| coordinate[1][1].to_i - coordinate[0][1].to_i == 1 }
+     true
+    else
+      false
+    end
   end
 
   def valid_placement?(ship, coordinates)
-    #binding.pry
+    
   end
 end
