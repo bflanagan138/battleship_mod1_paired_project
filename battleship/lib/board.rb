@@ -28,7 +28,7 @@ class Board
     cells.has_key?(coord)
   end
 
-  def coordinate_order?(coordinates) #comeback
+  def coordinate_order?(coordinates) #comeback dont think needed
   #  ship.length == coordinates.length
     valid_l = coordinates.sort {|a, b| a <=> b}
     valid_l == coordinates
