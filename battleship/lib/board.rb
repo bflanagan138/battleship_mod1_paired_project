@@ -29,11 +29,11 @@ class Board
   end
 
   def coordinate_order?(coordinates) #comeback
-  #  ship.length == coordinates.length 
+  #  ship.length == coordinates.length
     valid_l = coordinates.sort {|a, b| a <=> b}
     valid_l == coordinates
   end
-  
+
   def letter_same?(coordinates)
     letters = coordinates.map { |coordinate| coordinate[0] }
     letters.uniq.length == 1
@@ -54,6 +54,6 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    
+    horizontal_or_vertical?(coordinates) && ship.length == coordinates.length
   end
 end
