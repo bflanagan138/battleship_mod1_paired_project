@@ -55,8 +55,14 @@ RSpec.describe Board do
     submarine = Ship.new("Submarine", 2)
 
     expect(board.valid_placement?(cruiser,["A1","A2"])).to eq (false)
-    expect(board.valid_placement?(submarine,["A1","A2","A3"])).to eq (false)
-
+    expect(board.valid_placement?(submarine,["A1", "A2", "A3"])).to eq (false)
+    expect(board.valid_placement?(cruiser,["A1","A2", "A3"])).to eq (true)
+    expect(board.valid_placement?(submarine,["A2", "A3"])).to eq (true)
+    expect(board.valid_placement?(cruiser,["A1", "A3", "A2"])).to eq (false)
+    expect(board.valid_placement?(cruiser,["A1", "C2", "A3"])).to eq (false)
+    expect(board.valid_placement?(cruiser,["A1", "B2", "C3"])).to eq (false)
+    expect(board.valid_placement?(cruiser,["A3","A2", "A"])).to eq (false)
+    expect(board.valid_placement?(submarine,["A2", "B2"])).to eq (true)
   end
 
   it "can sort by letter and number" do
