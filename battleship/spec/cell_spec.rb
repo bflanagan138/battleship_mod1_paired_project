@@ -90,7 +90,7 @@ RSpec.describe Cell do
     cell_1.place_ship(cruiser)
 
     expect(cruiser.sunk?).to eq (false)
-    3.times do cruiser.hit
+    3.times do cell_1.fire_upon
     end
     expect(cruiser.sunk?).to eq (true)
     expect(cell_1.render).to eq ('X')
