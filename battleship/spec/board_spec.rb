@@ -29,7 +29,24 @@ RSpec.describe Board do
     expect(board.valid_coordinate?("A5")).to eq(false)
     expect(board.valid_coordinate?("E1")).to eq(false)
     expect(board.valid_coordinate?("A22")).to eq(false)
+  end
 
+  it 'has the same letter for all coordinates' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    expect(board.letter_same?(["A1","A2"])).to eq (true)
+    expect(board.letter_same?(["A1","B1"])).to eq (false)
+  end
+
+  it 'has the same number for all coordinates' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    expect(board.number_same?(["A1","B1"])).to eq (true)
+    expect(board.number_same?(["A1","A2"])).to eq (false)
   end
 
   it 'is a valid placement' do
@@ -42,7 +59,25 @@ RSpec.describe Board do
 
   end
 
+  it "can sort by letter and number" do
+  board = Board.new
+  cruiser = Ship.new("Cruiser", 3)
+  submarine = Ship.new("Submarine", 2)
 
+  expect(board.coordinate_order?(["A1", "B2", "C3"])).to be(true)
+  expect(board.coordinate_order?(["A1", "C2", "A3"])).to be(false)
+  expect(board.coordinate_order?(["A1", "A2", "A3"])).to be(true)
+  expect(board.coordinate_order?(["A1", "A3", "A2"])).to be(false)
 
+  end
 
+  it "cannot be diagonal" do
+  board = Board.new
+  cruiser = Ship.new("Cruiser", 3)
+  submarine = Ship.new("Submarine", 2)
+
+  expect(board.horizontal_or_vertical?(["A1", "B2", "C3"])).to be(false)
+  expect(board.horizontal_or_vertical?(["A1", "A2", "A3"])).to be(true)
+  expect(board.horizontal_or_vertical?(["A1", "B1", "C1"])).to be(true)
+  end
 end
