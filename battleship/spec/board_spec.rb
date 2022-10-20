@@ -32,7 +32,7 @@ RSpec.describe Board do
 
   end
 
-  it 'is a valid placement' do
+  xit 'is a valid placement' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -42,22 +42,27 @@ RSpec.describe Board do
 
   end
 
-  it "can sort by letter" do
+  xit "can sort by letter and number" do
   board = Board.new
   cruiser = Ship.new("Cruiser", 3)
   submarine = Ship.new("Submarine", 2)
 
-  expect(board.valid_placement?(cruiser,["A1", "B2", "C3"])).to be(true)
-  expect(board.valid_placement?(cruiser,["A1", "C2", "A3"])).to be(false)
+  expect(board.coordinate_order?(cruiser,["A1", "B2", "C3"])).to be(true)
+  expect(board.coordinate_order?(cruiser,["A1", "C2", "A3"])).to be(false)
+  expect(board.coordinate_order?(cruiser,["A1", "A2", "A3"])).to be(true)
+  expect(board.coordinate_order?(cruiser,["A1", "A3", "A2"])).to be(false)
 
   end
 
-  it "can sort by number" do
+  it "cant be diagnol" do
   board = Board.new
   cruiser = Ship.new("Cruiser", 3)
   submarine = Ship.new("Submarine", 2)
 
-  expect(board.valid_placement?(cruiser,["A1", "A2", "A3"])).to be(true)
-  expect(board.valid_placement?(cruiser,["A1", "A3", "A2"])).to be(false)
+  expect(board.lateral_placement?(["A1", "B2", "C3"])).to be(false)
+  expect(board.lateral_placement?(["A1", "A2", "A3"])).to be(true)
+  expect(board.lateral_placement?(["A1", "B1", "C1"])).to be(true)
+
+
   end
 end

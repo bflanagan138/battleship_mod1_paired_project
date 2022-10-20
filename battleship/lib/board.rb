@@ -28,10 +28,24 @@ class Board
     cells.has_key?(coord)
   end
 
-  def valid_placement?(ship, coordinates)
-    ship.length == coordinates.length && valid_l = coordinates.sort {|a, b| a <=> b}
-    valid_l == coordinates 
+  def coordinate_order?(coordinates) #comeback
+  #  ship.length == coordinates.length 
+    valid_l = coordinates.sort {|a, b| a <=> b}
+    valid_l == coordinates
+  end
 
+  def lateral_placement?(coordinates)
+
+    if coordinates.all? {|coordinate| coordinate[0] } &&
+       coordinates.each_cons(2).all? {|coordinate| coordinate[1][1].to_i - coordinate[0][1].to_i == 1 }
+       true
+     else
+       false
+     end
+
+  end
+
+  def valid_placement?(ship, coordinates)
     #binding.pry
   end
 end
