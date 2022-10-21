@@ -27,15 +27,12 @@ class Board
   def valid_coordinate?(coordinates)
     if coordinates.class == Array
         coordinates.map.all? {|coord| cells.has_key?(coord)}
-      #require 'pry'; binding.pry
-        #coord.each { |coordinate| cells.has_key?(coordinate) }
     elsif coordinates.class == String
       cells.has_key?(coordinates)
     end
   end
 
-  def coordinate_order?(coordinates) #comeback dont think needed ????
-  #  ship.length == coordinates.length
+  def coordinate_order?(coordinates)
     valid_l = coordinates.sort {|a, b| a <=> b}
     valid_l == coordinates
   end
@@ -52,7 +49,6 @@ class Board
 
   def horizontal?(coordinates)
     if letter_same?(coordinates)
-      # binding.pry
       coordinates.each_cons(2).all? do |coordinate|
        coordinate[1][1].to_i - coordinate[0][1].to_i == 1
       end
@@ -63,7 +59,6 @@ class Board
 
   def vertical?(coordinates)
     if number_same?(coordinates)
-      # binding.pry
       coordinates.each_cons(2).all? do |coordinate|
         coordinate[1].ord - coordinate[0].ord == 1
       end
@@ -72,21 +67,23 @@ class Board
     end
   end
   def horizontal_or_vertical?(coordinates)
-    #binding.pry
      horizontal?(coordinates) || vertical?(coordinates)
   end
-  #   if letter_same?(coordinates)
-  #   coordinates.each_cons(2).all? {|coordinate| coordinate[1][1].to_i - coordinate[0][1].to_i == 1 }
-  #     true
-  #   elsif number_same?(coordinates)
-  #     coordinates.each_cons(2).all? {|coordinate| coordinate[1].ord - coordinate[0].ord == 1 }
-  #   else
-  #     false
-  #   end
-  # end
 
   def valid_placement?(ship, coordinates)
-    horizontal_or_vertical?(coordinates) && ship.length == coordinates.length && coordinate_order?(coordinates) && valid_coordinate?(coordinates)
-   #require 'pry'; binding.pry
+    horizontal_or_vertical?(coordinates) && 
+    ship.length == coordinates.length && 
+    coordinate_order?(coordinates) && 
+    valid_coordinate?(coordinates)
  end
+#place a ship across valid cells
+#cells are equal to cell coordinates 
+  # def place(ship, coordinates)
+  #   require 'pry'; binding.pry
+  #   cells(coordinates)
+  # end
+
+  def render(option = false)
+    p "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+  end
 end
