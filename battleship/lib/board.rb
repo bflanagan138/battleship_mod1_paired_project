@@ -70,21 +70,43 @@ class Board
      horizontal?(coordinates) || vertical?(coordinates)
   end
 
-  def valid_placement?(ship, coordinates)
-    horizontal_or_vertical?(coordinates) && 
-    ship.length == coordinates.length && 
-    coordinate_order?(coordinates) && 
-    valid_coordinate?(coordinates)
- end
-#place a ship across valid cells
-#cells are equal to cell coordinates 
-  # def place(ship, coordinates)
-  #   require 'pry'; binding.pry
-  #   cells(coordinates)
+  # def occupied?(coordinates)
+  #   if coordinates.map.all? do |coordinate|
+  #     @cells[coordinate].empty? == false
+  #     end
+  #     true
+  #   else false
+  #   end
   # end
 
-  def render(option = false)
-    cells.render(option = false)
-    p "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+  def valid_placement?(ship, coordinates)
+    #if cell has a ship already false
+      coordinates.map.all? {|coordinate| @cells[coordinate].empty?} &&
+      horizontal_or_vertical?(coordinates) &&
+      ship.length == coordinates.length &&
+      coordinate_order?(coordinates) &&
+      valid_coordinate?(coordinates)
+  end
+
+#place a ship across valid cells
+#cells are equal to cell coordinates
+# iterate through coordinates and check if those coordinates are
+# equal to a cells key. if a coordinate is equal to a key
+# place ship on that coordinate
+  def place(ship, coordinates)
+    if  valid_placement?(ship, coordinates)
+     #require 'pry'; binding.pry
+     coordinates.each {|coordinate| @cells[coordinate].place_ship(ship)}
+
+     #cells(coordinates)
+    end
+   end
+
+  def board_render(option = false)
+    #binding.pry
+      @cells.keys.slice(0..3) do |cell|
+       @cells[cell].render(option = false
+       end
+    p "  1 2 3 4 \n" + "A . . . . \n" + "B . . . . \n" + "C . . . . \n" + "D . . . . \n"
   end
 end
