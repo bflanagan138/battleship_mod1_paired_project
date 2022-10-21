@@ -1,7 +1,7 @@
 require 'pry';
 class Board
 
-  attr_reader :cells
+  attr_accessor :cells
 
   def initialize
     @cells = {
@@ -84,6 +84,7 @@ class Board
   # end
 
   def render(option = false)
+    cells.render(option = false)
     p "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
   end
 end

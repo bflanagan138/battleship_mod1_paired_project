@@ -35,13 +35,8 @@ class Cell
         ship.hit
       end
    end
-#if empty and not fired upon '.'
-#if empty and fired upon 'M'
-#if not empty and not fired upon 'S'
-#if not empty and fired upon 'H'
-#if fired upon and ship sunk 'X'
+
 def render(option = false)
-# require 'pry'; binding.pry
   if option == false && @fired_upon == true && empty? == true
     'M'
   elsif option == false && @fired_upon == false
@@ -52,7 +47,6 @@ def render(option = false)
     'X'
   else option == true && empty? == false
     'S'
-    #require 'pry'; binding.pry
   end
 end
 
