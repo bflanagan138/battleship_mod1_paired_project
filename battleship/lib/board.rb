@@ -108,15 +108,15 @@ class Board
     a_row = @cells.keys.map do |cell|
       @cells[cell].render(option)
     end.slice(0..3)
-  #binding.pry
+ 
     b_row = @cells.keys.map do |cell|
-      @cells[cell].render(option = false)
+      @cells[cell].render(option)
     end.slice(4..7)
     c_row = @cells.keys.map do |cell|
-      @cells[cell].render(option = false)
+      @cells[cell].render(option)
     end.slice(8..11)
     d_row = @cells.keys.map do |cell|
-      @cells[cell].render(option = false)
+      @cells[cell].render(option)
     end.slice(12..15)
     #a_array = [" .", " .", " .", " ." ]
     string_a = "A, \n"

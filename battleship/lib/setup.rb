@@ -21,9 +21,12 @@ class Setup
     puts "The Cruiser is three units long and the Submarine is two units long."
     puts board.render(option = false)
     puts "Enter the squares for the Cruiser (3 spaces):"
-    squares = []
-    squares << gets.chomp.upcase
-    squares.slice(0..2)
-    board.place(cruiser, squares)
+    
+    squares_cruiser = gets.chomp.upcase.split(' ')
+    board.place(cruiser, squares_cruiser)
+    puts "Enter the squares for the Submarine (2 spaces):"
+    squares_submarine = gets.chomp.upcase.split(' ')
+    board.place(submarine, squares_submarine)
+    puts board.render(true)
   end
 end
