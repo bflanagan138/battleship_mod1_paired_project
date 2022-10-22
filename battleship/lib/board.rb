@@ -102,11 +102,24 @@ class Board
     end
    end
 
-  def board_render(option = false)
-    #binding.pry
-      @cells.keys.slice(0..3) do |cell|
-       @cells[cell].render(option = false
-       end
-    p "  1 2 3 4 \n" + "A . . . . \n" + "B . . . . \n" + "C . . . . \n" + "D . . . . \n"
+  def render(option = false)
+    # @cells.keys.each { |cell| @cells[cell] }.each_slice(4)
+    a_row = @cells.keys.slice(0..3) 
+    b_row = @cells.keys.slice(4..7)
+    c_row = @cells.keys.slice(8..11)
+    d_row = @cells.keys.slice(12..15)
+    a_array = [" .", " .", " .", " ." ]
+    string_a = "A, \n"
+    string_b = "B, \n"
+    string_c = "C, \n"
+    string_d = "D, \n"
+    string_a.gsub(",", a_array.join)
+    string_b.gsub(",", a_array.join)
+    p "  1 2 3 4 \n"  + "#{string_a.gsub(",", a_array.join)}" + "#{string_b.gsub(",", a_array.join)}" + "#{string_c.gsub(",", a_array.join)}" + "#{string_d.gsub(",", a_array.join)}"
+    # require 'pry'; binding.pry
+      # @cells.keys do |cell|
+      #  @cells.render(option = false)
+      # end
+      # p "  1 2 3 4 \n" + "A . . . . \n" + "B . . . . \n" + "C . . . . \n" + "D . . . . \n"
   end
 end
