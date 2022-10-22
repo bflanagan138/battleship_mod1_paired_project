@@ -94,16 +94,13 @@ class Board
 # equal to a cells key. if a coordinate is equal to a key
 # place ship on that coordinate
   def place(ship, coordinates)
-    if  valid_placement?(ship, coordinates)
-     #require 'pry'; binding.pry
+    if valid_placement?(ship, coordinates)
      coordinates.each {|coordinate| @cells[coordinate].place_ship(ship)}
-
-     #cells(coordinates)
     end
    end
 
   def render(option = false)
-    # @cells.keys.each { |cell| @cells[cell] }.each_slice(4)
+
     a_row = @cells.keys.slice(0..3) 
     b_row = @cells.keys.slice(4..7)
     c_row = @cells.keys.slice(8..11)
@@ -113,13 +110,6 @@ class Board
     string_b = "B, \n"
     string_c = "C, \n"
     string_d = "D, \n"
-    string_a.gsub(",", a_array.join)
-    string_b.gsub(",", a_array.join)
-    p "  1 2 3 4 \n"  + "#{string_a.gsub(",", a_array.join)}" + "#{string_b.gsub(",", a_array.join)}" + "#{string_c.gsub(",", a_array.join)}" + "#{string_d.gsub(",", a_array.join)}"
-    # require 'pry'; binding.pry
-      # @cells.keys do |cell|
-      #  @cells.render(option = false)
-      # end
-      # p "  1 2 3 4 \n" + "A . . . . \n" + "B . . . . \n" + "C . . . . \n" + "D . . . . \n"
+    "  1 2 3 4 \n" + "#{string_a.gsub(",", a_array.join)}" + "#{string_b.gsub(",", a_array.join)}" + "#{string_c.gsub(",", a_array.join)}" + "#{string_d.gsub(",", a_array.join)}"
   end
 end
