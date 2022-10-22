@@ -59,11 +59,12 @@ RSpec.describe Cell do
 
   it 'can be rendered' do
     cell_1 = Cell.new('B4')
-
-    expect(cell_1.render).to eq ('.')
+    cell_2 = Cell.new("A1")
+    cruiser = Ship.new("Cruiser", 3)
+    cell_2.place_ship(cruiser)
+    expect(cell_1.render).to eq (' .')
     cell_1.fire_upon
-
-    expect(cell_1.render).to eq ('M')
+    expect(cell_1.render).to eq (' M')
 
   end
 
@@ -73,15 +74,17 @@ RSpec.describe Cell do
     cell_1.place_ship(cruiser)
 
     cell_1.fire_upon
-    expect(cell_1.render).to eq ('H')
+    expect(cell_1.render).to eq (' H')
   end
 
   it 'can render a ship and reveal itself' do
     cell_1 = Cell.new('B4')
     cruiser = Ship.new("Cruiser", 3)
+
     cell_1.place_ship(cruiser)
 
-    expect(cell_1.render(true)).to eq ('S')
+    expect(cell_1.render).to eq (' .')
+    expect(cell_1.render(true)).to eq (' S')
   end
 
   it 'can sink ship' do
@@ -93,6 +96,6 @@ RSpec.describe Cell do
     3.times do cell_1.fire_upon
     end
     expect(cruiser.sunk?).to eq (true)
-    expect(cell_1.render).to eq ('X')
+    expect(cell_1.render).to eq (' X')
   end
 end
