@@ -100,16 +100,28 @@ class Board
    end
 
   def render(option = false)
-
-    a_row = @cells.keys.slice(0..3) 
-    b_row = @cells.keys.slice(4..7)
-    c_row = @cells.keys.slice(8..11)
-    d_row = @cells.keys.slice(12..15)
-    a_array = [" .", " .", " .", " ." ]
+    #if ship is not equal to nil
+    a_row = @cells.keys.map do |cell|
+      @cells[cell].render(option = false)
+    end.slice(0..3)
+    # binding.pry
+    b_row = @cells.keys.map do |cell|
+      @cells[cell].render(option = false)
+    end.slice(4..7)
+    c_row = @cells.keys.map do |cell|
+      @cells[cell].render(option = false)
+    end.slice(8..11)
+    d_row = @cells.keys.map do |cell|
+      @cells[cell].render(option = false)
+    end.slice(12..15)
+    #a_array = [" .", " .", " .", " ." ]
     string_a = "A, \n"
     string_b = "B, \n"
     string_c = "C, \n"
     string_d = "D, \n"
-    "  1 2 3 4 \n" + "#{string_a.gsub(",", a_array.join)}" + "#{string_b.gsub(",", a_array.join)}" + "#{string_c.gsub(",", a_array.join)}" + "#{string_d.gsub(",", a_array.join)}"
+    "  1 2 3 4 \n" + "#{string_a.gsub(",", a_row.join)}" +
+    "#{string_b.gsub(",", b_row.join)}" +
+    "#{string_c.gsub(",", c_row.join)}" +
+    "#{string_d.gsub(",", d_row.join)}"
   end
 end

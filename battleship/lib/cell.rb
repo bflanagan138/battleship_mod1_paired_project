@@ -1,14 +1,15 @@
 class Cell
+
   attr_reader :coordinate,
               :ship,
               :fired_upon
-  attr_accessor :render_cell            
-  
+   attr_accessor :render
+
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = ship
     @fired_upon = false
-    @render_cell = "."
+    @render = " ."
   end
 
   def empty?
@@ -40,15 +41,15 @@ class Cell
 def render(option = false)
   # require 'pry'; binding.pry
   if option == false && @fired_upon == true && empty? == true
-    @render_cell = 'M'
+    @render = ' M'
   elsif option == false && @fired_upon == false
-    @render_cell
+     @render
   elsif option == false && @fired_upon == true && @ship.sunk? == false
-    @render_cell = 'H'
+     @render = ' H'
   elsif @ship.sunk?
-    @render_cell = 'X'
+     @render = ' X'
   else option == true && empty? == false
-    @render_cell = 'S'
+     @render = ' S'
   end
 end
 
