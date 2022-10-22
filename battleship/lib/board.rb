@@ -102,9 +102,9 @@ class Board
   def render(option = false)
     #if ship is not equal to nil
     a_row = @cells.keys.map do |cell|
-      @cells[cell].render(option = false)
+      @cells[cell].render(option)
     end.slice(0..3)
-    # binding.pry
+  #binding.pry
     b_row = @cells.keys.map do |cell|
       @cells[cell].render(option = false)
     end.slice(4..7)

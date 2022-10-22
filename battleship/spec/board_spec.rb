@@ -131,11 +131,11 @@ RSpec.describe Board do
     cruiser = Ship.new("Cruiser", 3)
     board.place(cruiser, ["A1", "A2", "A3"])
     cell_1 = board.cells["A1"]
-    cell_1.fire_upon
 
 
      expect(board.render).to eq ("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
-    #expect(board.render(true)).to eq ("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+    expect(board.render(true)).to eq ("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+    cell_1.fire_upon
     expect(board.render).to eq ("  1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n")
   end
 
