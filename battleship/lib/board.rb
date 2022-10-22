@@ -1,4 +1,4 @@
-require 'pry';
+require 'pry'
 class Board
 
   attr_accessor :cells
@@ -81,11 +81,14 @@ class Board
 
   def valid_placement?(ship, coordinates)
     #if cell has a ship already false
-      coordinates.map.all? {|coordinate| @cells[coordinate].empty?} &&
-      horizontal_or_vertical?(coordinates) &&
-      ship.length == coordinates.length &&
-      coordinate_order?(coordinates) &&
-      valid_coordinate?(coordinates)
+    coordinates.each do |coordinate|
+       @cells.keys.include?(coordinate)
+    end &&
+    coordinates.map.all? {|coordinate| @cells[coordinate].empty?} &&
+    horizontal_or_vertical?(coordinates) &&
+    ship.length == coordinates.length &&
+    coordinate_order?(coordinates) &&
+    valid_coordinate?(coordinates)
   end
 
 #place a ship across valid cells
