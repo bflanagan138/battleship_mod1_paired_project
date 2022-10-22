@@ -101,6 +101,10 @@ class Board
 
   def render(option = false)
     #if ship is not equal to nil
+    # require 'pry'; binding.pry
+    # a_row_occupied = @cells.keys.find_all do |cell|
+    #   cell.ship != nil
+    # end
     a_row = @cells.keys.map do |cell|
       @cells[cell].render(option)
     end.slice(0..3)

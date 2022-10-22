@@ -12,10 +12,6 @@ class Cell
     #@render = " ."
   end
 
-  def ship
-    
-  end
-
   def empty?
     if @ship == nil
       true
@@ -44,21 +40,19 @@ class Cell
 
 def render(option = false)
   # require 'pry'; binding.pry
-  if option == false && @fired_upon == true && empty? == true
-    #@render =
-    ' M'
-  elsif option == false && @fired_upon == false
-    #@render
-    ' .'
+  if empty? == false && ship.health == 0
+    ' X'  
   elsif option == false && @fired_upon == true && @ship.sunk? == false
     #@render =
     ' H'
+  elsif  option == false && @fired_upon == true && empty? == true
+    #@render =
+    ' M'
   elsif option == true && empty? == false
     #@render =
     ' S'
-  else @ship.sunk?
-    #@render =
-    ' X'
+  else
+    ' .'
   end
 end
 
