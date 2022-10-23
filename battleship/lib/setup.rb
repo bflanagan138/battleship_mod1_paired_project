@@ -24,19 +24,22 @@ class Setup
         board.place(cruiser, computer_cruiser)
       end
 
-    def place_submarine
-      computer_submarine = board.cells.keys.shuffle.slice(0..1)
-      until board.valid_placement?(submarine, computer_submarine) == true
-        computer_submarine = board.cells.keys.shuffle.slice(0..2)
-      end
-      board.place(submarine, computer_submarine)
-      puts board.render(true)
-    end
+
+
+    # def place_submarine
+    #   computer_submarine = board.cells.keys.shuffle.slice(0..1)
+    #   until board.valid_placement?(submarine, computer_submarine) == true
+    #     computer_submarine = board.cells.keys.shuffle.slice(0..2)
+    #   end
+    #   board.place(submarine, computer_submarine)
+    # end
   end
+
 
 
   def start_game
     computer
+    puts computer.board.render(true)
     board = Board.new
     cruiser = Ship.new(cruiser, 3)
     submarine = Ship.new(submarine, 2)
