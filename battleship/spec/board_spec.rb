@@ -133,11 +133,17 @@ RSpec.describe Board do
     cell_1 = board.cells["A1"]
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
+    cell_4 = board.cells["A4"]
 
     expect(board.render).to eq ("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
     expect(board.render(true)).to eq ("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     cell_1.fire_upon
     expect(board.render).to eq ("  1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n")
+    cell_4.fire_upon
+    expect(board.render).to eq("  1 2 3 4 \nA H . . M \nB . . . . \nC . . . . \nD . . . . \n")
+    cell_2.fire_upon
+    cell_3.fire_upon
+    expect(board.render).to eq("  1 2 3 4 \nA X X X M \nB . . . . \nC . . . . \nD . . . . \n")
   end
 
 

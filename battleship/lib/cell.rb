@@ -41,8 +41,8 @@ class Cell
 def render(option = false)
   # require 'pry'; binding.pry
   if empty? == false && ship.health == 0
-    ' X'  
-  elsif option == false && @fired_upon == true && @ship.sunk? == false
+    ' X'
+  elsif option == false && @fired_upon == true && empty? == false && ship.sunk? == false
     #@render =
     ' H'
   elsif  option == false && @fired_upon == true && empty? == true
