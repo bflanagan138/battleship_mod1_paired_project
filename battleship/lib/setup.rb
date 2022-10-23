@@ -1,13 +1,10 @@
-#Computer can place ships randomly in valid locations
-#User can enter valid sequences to place both ships
-#Entering invalid ship placements prompts user to enter valid placements
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
-
+require './lib/turn'
 
 class Setup
-
+  # attr_reader :computer
   def initialize
   end
 
@@ -15,33 +12,23 @@ class Setup
     board = Board.new
     cruiser = Ship.new(cruiser, 3)
     submarine = Ship.new(submarine, 2)
-# require 'pry'; binding.pry
-      # def place_cruiser
+    def place_ships
         computer_cruiser = board.cells.keys.shuffle.slice(0..2)
-        # require 'pry'; binding.pry
         while board.valid_placement?(cruiser, computer_cruiser) == false
-          # require 'pry'; binding.pry
           computer_cruiser = board.cells.keys.shuffle.slice(0..2)
-          # require 'pry'; binding.pry
         end
-        # require 'pry'; binding.pry
         board.place(cruiser, computer_cruiser)
-      # end
-# require 'pry'; binding.pry
-    # def place_submarine
       computer_submarine = board.cells.keys.shuffle.slice(0..1)
       while board.valid_placement?(submarine, computer_submarine) == false
         computer_submarine = board.cells.keys.shuffle.slice(0..1)
       end
-      # require 'pry'; binding.pry
       board.place(submarine, computer_submarine)
-    # end
+      board.render
+    end
   end
 
   def start_game
     computer
-    # require 'pry'; binding.pry
-    # puts computer.place_cruiser.board.render(true)
     board = Board.new
     cruiser = Ship.new(cruiser, 3)
     submarine = Ship.new(submarine, 2)
@@ -67,6 +54,17 @@ class Setup
       squares_submarine = gets.chomp.upcase.split(' ')
     end
     board.place(submarine, squares_submarine)
-    puts board.render(true)
+
+    def turn
+      puts "=============COMPUTER BOARD=============" 
+      require 'pry'; binding.pry
+      puts computer.board.render
+      puts "==============PLAYER BOARD==============" 
+      puts board.render(true)
+    end
+    turn
   end
+  
 end
+# end
+# turn
