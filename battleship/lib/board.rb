@@ -81,14 +81,14 @@ class Board
 
   def valid_placement?(ship, coordinates)
     #if cell has a ship already false
+    valid_coordinate?(coordinates) &&
     coordinates.each do |coordinate|
        @cells.keys.include?(coordinate)
     end &&
     coordinates.map.all? {|coordinate| @cells[coordinate].empty?} &&
     horizontal_or_vertical?(coordinates) &&
     ship.length == coordinates.length &&
-    coordinate_order?(coordinates) &&
-    valid_coordinate?(coordinates)
+    coordinate_order?(coordinates)
   end
 
 #place a ship across valid cells
@@ -111,7 +111,7 @@ class Board
     a_row = @cells.keys.map do |cell|
       @cells[cell].render(option)
     end.slice(0..3)
- 
+
     b_row = @cells.keys.map do |cell|
       @cells[cell].render(option)
     end.slice(4..7)
