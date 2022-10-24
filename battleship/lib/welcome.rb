@@ -19,7 +19,7 @@ def start
     game.start_game
   else
     puts 'invalid entry. please try again.'
-    start_game
+    start
   end
 end
 start
