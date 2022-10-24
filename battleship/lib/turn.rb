@@ -1,14 +1,12 @@
 require './lib/board'
 require './lib/cell'
-require './lib/setup'
+require './lib/game'
 
 class Turn
 #display game boards
-#take a guess against computer
+#take a guess against computer - cell.fire_upon method & cell.fired_upon? to check if valid
 #display feedback??? 
 #check for win/game over???
-#iteration pattern indicates we don't display feedback or check for game over until after both player and computer take turn
-#what if player wins and computer wins?
 #computer plays their turn (behind the scenes)
 #display feedback
 #check for win/game over
@@ -27,8 +25,8 @@ class Turn
   end
 
   def correct?
-    #check if guess is valid
+    #check if guess is valid cell.fired_upon?
     ##invalid for guesses if already guessed that cell
-    #check if guess is a miss, hit, hit & sunk
+    #check if guess is a miss, hit, hit & sunk 
   end
 end

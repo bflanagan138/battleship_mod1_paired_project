@@ -3,7 +3,7 @@ require './lib/cell'
 require './lib/ship'
 require './lib/turn'
 
-class Setup
+class Game
 
   def initialize
   end
@@ -14,7 +14,7 @@ class Setup
     cruiser = Ship.new(cruiser, 3)
     submarine = Ship.new(submarine, 2)
     computer_board = Board.new
-    turn = Turn.new
+    # turn = Turn.new(guess)
     computer_cruiser = Ship.new(computer_cruiser, 3)
     computer_submarine = Ship.new(computer_submarine, 2)
 
@@ -59,6 +59,7 @@ class Setup
       puts ""
       puts "Enter the coordinate for your shot:"
       guess = gets.chomp.upcase
+      turn = Turn.new(guess)
     turn
   end
 end
