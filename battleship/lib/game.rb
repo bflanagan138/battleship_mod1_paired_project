@@ -5,27 +5,38 @@ require './lib/turn'
 
 class Game
 
+  attr_reader :board,
+              :cruiser,
+              :submarine,
+              :computer_board,
+              :computer_cruiser,
+              :computer_submarine,
+              :computer_guesses
+
+
+
   def initialize
+    @board = Board.new
+    @cruiser = Ship.new(cruiser, 3)
+    @submarine = Ship.new(submarine, 2)
+    @computer_board = Board.new
+    @computer_cruiser = Ship.new(computer_cruiser, 3)
+    @computer_submarine = Ship.new(computer_submarine, 2)
+    @computer_guesses = board.cells.keys.shuffle
   end
 
   def start_game
     #computer
-    board = Board.new
-    cruiser = Ship.new(cruiser, 3)
-    submarine = Ship.new(submarine, 2)
-    computer_board = Board.new
-    computer_cruiser = Ship.new(computer_cruiser, 3)
-    computer_submarine = Ship.new(computer_submarine, 2)
 
-      computer_cruiser_cells = computer_board.cells.keys.shuffle.slice(0..2)
+      computer_cruiser_cells = computer_guesses.shuffle.slice(0..2)
       while computer_board.valid_placement?(computer_cruiser, computer_cruiser_cells) == false
-        computer_cruiser_cells = computer_board.cells.keys.shuffle.slice(0..2)
+        computer_cruiser_cells = computer_guesses.shuffle.slice(0..2)
       end
       computer_board.place(computer_cruiser, computer_cruiser_cells)
-   
-      computer_submarine_cells = computer_board.cells.keys.shuffle.slice(0..1)
+
+      computer_submarine_cells = computer_guesses.shuffle.slice(0..1)
       while computer_board.valid_placement?(computer_submarine, computer_submarine_cells) == false
-        computer_submarine_cells = computer_board.cells.keys.shuffle.slice(0..1)
+        computer_submarine_cells = computer_guesses.shuffle.slice(0..1)
       end
       computer_board.place(computer_submarine, computer_submarine_cells)
 
@@ -51,15 +62,31 @@ class Game
     end
     board.place(submarine, squares_submarine)
 
-      puts "=============COMPUTER BOARD============="
-      puts computer_board.render
-      puts "==============PLAYER BOARD=============="
-      puts board.render(true)
-      puts ""
-      puts "Enter the coordinate for your shot:"
-      guess = gets.chomp.upcase
-      require 'pry'; binding.pry
-      turn = Turn.new(guess)
-    turn
+      def turn
+        puts "=============COMPUTER BOARD============="
+        puts @computer_board.render
+        puts "==============PLAYER BOARD=============="
+        puts board.render(true)
+        puts ""
+        puts "Enter the coordinate for your shot:"
+        guess = gets.chomp.upcase
+        #require 'pry'; binding.pry
+        computer_board.cells[guess].fire_upon
+
+        if (computer_cruiser.sunk? && computer_submarine.sunk?) == true
+          gameover.player_won
+        end
+        board.cells[computer_guesses.pop].fire_upon
+        if (cruiser.sunk? && submarine.sunk?) == true
+          puts "I won!"
+        end
+        turn
+      end
+
+
+
+      # turn = Turn.new(guess)
+      turn
+
   end
 end
