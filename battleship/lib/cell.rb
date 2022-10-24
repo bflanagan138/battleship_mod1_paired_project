@@ -27,21 +27,30 @@ class Cell
    def fired_upon?
      @fired_upon
    end
-
-
-   def fire_upon
+    
+    def fire_upon
       @fired_upon = true
       if empty? == false
         ship.hit
       end
-   end
+    end
+
+  #  def fire_upon
+  #     if empty? == false && @fired_upon == false
+  #       ship.hit
+  #       @fired_upon = true
+  #     else empty? == true
+  #       ' M'
+  #       @fired_upon
+  #     end
+  #  end
 
 def render(option = false)
   if empty? == false && ship.health == 0
     ' X'
-  elsif option == false && @fired_upon == true && empty? == false && ship.sunk? == false
+  elsif  @fired_upon == true && empty? == false && ship.sunk? == false
     ' H'
-  elsif  option == false && @fired_upon == true && empty? == true
+  elsif   @fired_upon == true && empty? == true
     ' M'
   elsif option == true && empty? == false
     ' S'

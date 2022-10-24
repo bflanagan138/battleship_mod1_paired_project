@@ -14,7 +14,6 @@ class Game
     cruiser = Ship.new(cruiser, 3)
     submarine = Ship.new(submarine, 2)
     computer_board = Board.new
-    # turn = Turn.new(guess)
     computer_cruiser = Ship.new(computer_cruiser, 3)
     computer_submarine = Ship.new(computer_submarine, 2)
 
@@ -59,6 +58,7 @@ class Game
       puts ""
       puts "Enter the coordinate for your shot:"
       guess = gets.chomp.upcase
+      require 'pry'; binding.pry
       turn = Turn.new(guess)
     turn
   end
