@@ -41,6 +41,7 @@ RSpec.describe Cell do
     cell.place_ship(cruiser)
 
     expect(cell.fired_upon?).to eq (false)
+
     cell.fire_upon
 
     expect(cell.fired_upon?).to eq (true)
@@ -54,7 +55,6 @@ RSpec.describe Cell do
 
     expect(cell.ship.health).to eq (2)
     expect(cell.fired_upon?).to eq (true)
-
   end
 
   it 'can be rendered' do
@@ -62,10 +62,11 @@ RSpec.describe Cell do
     cell_2 = Cell.new("A1")
     cruiser = Ship.new("Cruiser", 3)
     cell_2.place_ship(cruiser)
+
     expect(cell_1.render).to eq (' .')
     cell_1.fire_upon
     expect(cell_1.render).to eq (' M')
-
+    expect(cell_2.render).to eq (' .')
   end
 
   it 'can render a ship and be fired upon' do
@@ -77,7 +78,7 @@ RSpec.describe Cell do
     expect(cell_1.render).to eq (' H')
   end
 
-  it 'can render a ship and reveal itself' do
+  it 'can render a ship and reveal itself using an optional argument' do
     cell_1 = Cell.new('B4')
     cruiser = Ship.new("Cruiser", 3)
 
@@ -87,14 +88,17 @@ RSpec.describe Cell do
     expect(cell_1.render(true)).to eq (' S')
   end
 
-  it 'can sink ship' do
+  it 'can sink ship when hit as many times as it is long' do
     cell_1 = Cell.new('B4')
     cruiser = Ship.new("Cruiser", 3)
     cell_1.place_ship(cruiser)
 
     expect(cruiser.sunk?).to eq (false)
-    3.times do cell_1.fire_upon
-    end
+      2.times do 
+        cell_1.fire_upon
+      end
+    expect(cruiser.sunk?).to eq (false)
+    cell_1.fire_upon
     expect(cruiser.sunk?).to eq (true)
     expect(cell_1.render).to eq (' X')
   end
