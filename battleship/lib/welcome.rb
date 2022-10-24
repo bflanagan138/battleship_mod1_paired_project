@@ -23,11 +23,6 @@ def start
     puts 'invalid entry. please try again.'
     start
   end
-
-  #Computer can place ships randomly in valid locations
-  #User can enter valid sequences to place both ships
-  #Entering invalid ship placements prompts user to enter valid placements
-
 end
 
 
