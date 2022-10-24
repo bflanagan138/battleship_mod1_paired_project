@@ -59,14 +59,21 @@ RSpec.describe Board do
   end
 
   describe ('#coordinate_order?') do
-    it "can sort by letter and number" do
+    it "can sort by letter and number and return true if they are in order" do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
 
       expect(board.coordinate_order?(["A1", "B2", "C3"])).to be(true)
-      expect(board.coordinate_order?(["A1", "C2", "A3"])).to be(false)
       expect(board.coordinate_order?(["A1", "A2", "A3"])).to be(true)
+    end
+    
+     it "can sort by letter and number and return false if they are not in order" do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      submarine = Ship.new("Submarine", 2)
+
+      expect(board.coordinate_order?(["A1", "C2", "A3"])).to be(false)
       expect(board.coordinate_order?(["A1", "A3", "A2"])).to be(false)
     end
   end
