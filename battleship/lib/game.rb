@@ -1,9 +1,6 @@
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
-require './lib/turn'
-require './lib/gameover'
-# require './lib/welcome'
 
 class Game
 
