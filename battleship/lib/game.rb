@@ -2,6 +2,8 @@ require './lib/board'
 require './lib/cell'
 require './lib/ship'
 require './lib/turn'
+require './lib/gameover'
+# require './lib/welcome'
 
 class Game
 
@@ -16,6 +18,7 @@ class Game
 
 
   def initialize
+    # welcome = Welcome.new
     @board = Board.new
     @cruiser = Ship.new(cruiser, 3)
     @submarine = Ship.new(submarine, 2)
@@ -74,19 +77,21 @@ class Game
         computer_board.cells[guess].fire_upon
 
         if (computer_cruiser.sunk? && computer_submarine.sunk?) == true
-          gameover.player_won
+          # gameover.player_won
+          puts "You win!"
+          welcome = Welcome.new
+          welcome.main_menu
         end
         board.cells[computer_guesses.pop].fire_upon
         if (cruiser.sunk? && submarine.sunk?) == true
-          puts "I won!"
+          # gameover.computer_won
+          puts "I win!"
+          welcome = Welcome.new
+          welcome.main_menu
         end
         turn
       end
-
-
-
       # turn = Turn.new(guess)
       turn
-
   end
 end
