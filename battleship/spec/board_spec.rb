@@ -33,7 +33,8 @@ RSpec.describe Board do
   end
 
   describe ('valid_coordinate?') do
-    it 'is a invalid coordinate' do
+
+    it 'is an invalid coordinate' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
@@ -52,7 +53,6 @@ RSpec.describe Board do
 
       expect(board.valid_coordinate?("A1")).to eq(true)
       expect(board.valid_coordinate?("D4")).to eq(true)
-      expect(board.valid_coordinate?("A5")).to eq(false)
       expect(board.valid_coordinate?( ["A1", "A2"])).to be (true)
       expect(board.valid_coordinate?( ["B1", "C1", "D1"])).to be (true)
     end
@@ -77,19 +77,31 @@ RSpec.describe Board do
       board = Board.new
 
       expect(board.letter_same?(["A1","A2"])).to eq (true)
-      expect(board.letter_same?(["A1","B1"])).to eq (false)
+      expect(board.letter_same?(["B1","B2","B3"])).to eq (true)
       end
+
+    it 'does not have the same letter for all coordinates' do
+      board = Board.new
+
+      expect(board.letter_same?(["A1","B2"])).to eq (false)
+      expect(board.letter_same?(["A1","B2","C3"])).to eq (false)
+    end
   end
 
   describe ('#number_same?') do
 
     it 'has the same number for all coordinates' do
       board = Board.new
-      cruiser = Ship.new("Cruiser", 3)
-      submarine = Ship.new("Submarine", 2)
 
     expect(board.number_same?(["A1","B1"])).to eq (true)
-    expect(board.number_same?(["A1","A2"])).to eq (false)
+    expect(board.number_same?(["A1","B1","C1"])).to eq (true)
+    end
+
+    it 'does not have the sume number for all coordinates' do
+      board = Board.new
+
+      expect(board.number_same?(["A1","A2"])).to eq (false)
+      expect(board.number_same?(["A1","B1","C2"])).to eq (false)
     end
   end
 
@@ -115,10 +127,29 @@ RSpec.describe Board do
       expect(board.vertical?(["C3", "D3"])).to eq (true)
       expect(board.vertical?(["B3", "C3", "D3"])).to be(true)
     end
+
+    it 'is not vertical' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      submarine = Ship.new("Submarine", 2)
+
+      expect(board.vertical?(["A1", "B2", "C1"])).to eq (false)
+      expect(board.vertical?(["C3", "D4"])).to eq (false)
+      expect(board.vertical?(["B3", "C3", "A4"])).to be(false)
+    end
   end
 
   describe ('#horizontal_or_vertical?') do
 
+    it 'can be horizonatal or vertical' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      submarine = Ship.new("Submarine", 2)
+
+      expect(board.horizontal_or_vertical?(["A1", "A2", "A3"])).to be(true)
+      expect(board.horizontal_or_vertical?(["B1", "B2", "B3"])).to be(true)
+      expect(board.horizontal_or_vertical?(["D2", "D3", "D4"])).to be(true)
+    end
     it "cannot be diagonal" do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
