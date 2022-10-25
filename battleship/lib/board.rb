@@ -89,22 +89,13 @@ class Board
   end
 
   def render(option = false)
-
-    a_row = @cells.keys.map do |cell|
+    rows = @cells.keys.map do |cell|
       @cells[cell].render(option)
-    end.slice(0..3)
-
-    b_row = @cells.keys.map do |cell|
-      @cells[cell].render(option)
-    end.slice(4..7)
-
-    c_row = @cells.keys.map do |cell|
-      @cells[cell].render(option)
-    end.slice(8..11)
-
-    d_row = @cells.keys.map do |cell|
-      @cells[cell].render(option)
-    end.slice(12..15)
+    end
+    a_row = rows.slice(0..3)
+    b_row = rows.slice(4..7)
+    c_row = rows.slice(8..11)
+    d_row = rows.slice(12..15)
 
     string_a = "A, \n"
     string_b = "B, \n"
