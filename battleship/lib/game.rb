@@ -64,9 +64,6 @@ class Game
         puts ""
         puts "Enter the coordinate for your shot:"
         guess = gets.chomp.upcase
-        # require 'pry'; binding.pry
-        # computer_board.cells.values.each do |value|
-          # require 'pry'; binding.pry
           if computer_board.cells.keys.include?(guess) == false
             puts "Invalid choice. Try again"
             turn
@@ -74,7 +71,7 @@ class Game
             puts "You have already fired on that cell. Try again"
             turn
           end
-        # end
+
         computer_board.cells[guess].fire_upon
         if (computer_cruiser.sunk? && computer_submarine.sunk?) == true
           puts ""
@@ -96,15 +93,10 @@ class Game
           elsif computer_board.cells[guess].ship.health == 0 && computer_submarine.sunk? == true
           puts "You sunk my submarine!"
           end
-        #   puts "Your shot on #{guess} was a hit!"
-        # elsif computer_board.cells[guess].empty? == true
-        #   puts "Your shot on #{guess} was a miss."
         end
 
         computer_guess = computer_guesses.pop
-        # require 'pry'; binding.pry
         board.cells[computer_guess].fire_upon
-        # require 'pry'; binding.pry
         if (cruiser.sunk? && submarine.sunk?) == true
           puts ""
           puts "I win!"
@@ -119,16 +111,11 @@ class Game
           puts "My shot on #{computer_guess} was a miss."
         elsif board.cells[computer_guess].empty? == false
           puts "My shot on #{computer_guess} was a hit!"
-          # require 'pry'; binding.pry
-            if board.cells[computer_guess].ship.health == 0 && cruiser.sunk? == true
-                puts "I sunk your cruiser!"
-            elsif board.cells[computer_guess].ship.health == 0 && submarine.sunk? == true
-              puts "I sunk your submarine!"
-            end
-              # puts "I sunk your #{sunk_ship}!"
-            # elsif submarine.sunk? == true
-            #   puts "I sunk your submarine!"
-            # else
+          if board.cells[computer_guess].ship.health == 0 && cruiser.sunk? == true
+              puts "I sunk your cruiser!"
+          elsif board.cells[computer_guess].ship.health == 0 && submarine.sunk? == true
+            puts "I sunk your submarine!"
+          end
         end
         turn
       end
