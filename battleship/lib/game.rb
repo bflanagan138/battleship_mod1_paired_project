@@ -77,7 +77,13 @@ class Game
         # end
         computer_board.cells[guess].fire_upon
         if (computer_cruiser.sunk? && computer_submarine.sunk?) == true
+          puts ""
           puts "You win!"
+          puts "=============COMPUTER BOARD============="
+          puts @computer_board.render
+          puts "==============PLAYER BOARD=============="
+          puts board.render(true)
+          puts ""
           welcome = Welcome.new
           welcome.main_menu
         elsif computer_cruiser.sunk? == true
@@ -85,24 +91,44 @@ class Game
         elsif computer_submarine.sunk? == true
           puts "You sunk my submarine!"
         elsif computer_board.cells[guess].empty? == false
-          puts "Your shot on #{guess} was a hit!"
-        elsif computer_board.cells[guess].empty? == true
-          puts "Your shot on #{guess} was a miss."
+          if computer_board.cells[guess].ship.health == 0 && computer_cruiser.sunk? == true
+            puts "You sunk my cruiser!"
+          elsif computer_board.cells[guess].ship.health == 0 && computer_submarine.sunk? == true
+          puts "You sunk my submarine!"
+          end
+        #   puts "Your shot on #{guess} was a hit!"
+        # elsif computer_board.cells[guess].empty? == true
+        #   puts "Your shot on #{guess} was a miss."
         end
 
-        board.cells[computer_guesses.pop].fire_upon
+        computer_guess = computer_guesses.pop
+        # require 'pry'; binding.pry
+        board.cells[computer_guess].fire_upon
+        # require 'pry'; binding.pry
         if (cruiser.sunk? && submarine.sunk?) == true
+          puts ""
           puts "I win!"
+          puts "=============COMPUTER BOARD============="
+          puts @computer_board.render
+          puts "==============PLAYER BOARD=============="
+          puts board.render(true)
+          puts ""
           welcome = Welcome.new
           welcome.main_menu
-        elsif cruiser.sunk? == true
-          puts "I sunk your cruiser!"
-        elsif submarine.sunk? == true
-          puts "I sunk your submarine!"
-        elsif board.cells[guess].empty? == false
-          puts "My shot on #{guess} was a hit!"
-        elsif board.cells[guess].empty? == true
-          puts "My shot on #{guess} was a miss."
+        elsif board.cells[computer_guess].empty? == true
+          puts "My shot on #{computer_guess} was a miss."
+        elsif board.cells[computer_guess].empty? == false
+          puts "My shot on #{computer_guess} was a hit!"
+          # require 'pry'; binding.pry
+            if board.cells[computer_guess].ship.health == 0 && cruiser.sunk? == true
+                puts "I sunk your cruiser!"
+            elsif board.cells[computer_guess].ship.health == 0 && submarine.sunk? == true
+              puts "I sunk your submarine!"
+            end
+              # puts "I sunk your #{sunk_ship}!"
+            # elsif submarine.sunk? == true
+            #   puts "I sunk your submarine!"
+            # else
         end
         turn
       end
