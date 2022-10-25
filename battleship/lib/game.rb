@@ -76,7 +76,11 @@ class Game
           end
         # end
         computer_board.cells[guess].fire_upon
-        if computer_cruiser.sunk? == true
+        if (computer_cruiser.sunk? && computer_submarine.sunk?) == true
+          puts "You win!"
+          welcome = Welcome.new
+          welcome.main_menu
+        elsif computer_cruiser.sunk? == true
           puts "You sunk my cruiser!"
         elsif computer_submarine.sunk? == true
           puts "You sunk my submarine!"
@@ -84,10 +88,6 @@ class Game
           puts "Your shot on #{guess} was a hit!"
         elsif computer_board.cells[guess].empty? == true
           puts "Your shot on #{guess} was a miss."
-        elsif (computer_cruiser.sunk? && computer_submarine.sunk?) == true
-          puts "You win!"
-          welcome = Welcome.new
-          welcome.main_menu
         end
 
         board.cells[computer_guesses.pop].fire_upon
@@ -95,9 +95,17 @@ class Game
           puts "I win!"
           welcome = Welcome.new
           welcome.main_menu
+        elsif cruiser.sunk? == true
+          puts "I sunk your cruiser!"
+        elsif submarine.sunk? == true
+          puts "I sunk your submarine!"
+        elsif board.cells[guess].empty? == false
+          puts "My shot on #{guess} was a hit!"
+        elsif board.cells[guess].empty? == true
+          puts "My shot on #{guess} was a miss."
         end
         turn
       end
       turn
+    end
   end
-end
