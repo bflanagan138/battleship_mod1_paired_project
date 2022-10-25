@@ -83,11 +83,10 @@ class Game
           puts ""
           welcome = Welcome.new
           welcome.main_menu
-        elsif computer_cruiser.sunk? == true
-          puts "You sunk my cruiser!"
-        elsif computer_submarine.sunk? == true
-          puts "You sunk my submarine!"
+        elsif computer_board.cells[guess].empty? == true
+          puts "Your shot on #{guess} was a miss."
         elsif computer_board.cells[guess].empty? == false
+          puts "Your shot on #{guess} was a hit!"
           if computer_board.cells[guess].ship.health == 0 && computer_cruiser.sunk? == true
             puts "You sunk my cruiser!"
           elsif computer_board.cells[guess].ship.health == 0 && computer_submarine.sunk? == true
