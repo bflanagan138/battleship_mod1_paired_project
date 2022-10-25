@@ -55,7 +55,7 @@ class Game
       squares_submarine = gets.chomp.upcase.split(' ')
     end
     board.place(submarine, squares_submarine)
-
+    puts `clear`
       def turn
         puts "=============COMPUTER BOARD============="
         puts @computer_board.render
@@ -65,16 +65,18 @@ class Game
         puts "Enter the coordinate for your shot:"
         guess = gets.chomp.upcase
           if computer_board.cells.keys.include?(guess) == false
+            puts `clear`
             puts "Invalid choice. Try again"
             turn
           elsif computer_board.cells[guess].fired_upon == true
+            puts `clear`
             puts "You have already fired on that cell. Try again"
             turn
           end
 
         computer_board.cells[guess].fire_upon
         if (computer_cruiser.sunk? && computer_submarine.sunk?) == true
-          puts ""
+          puts `clear`
           puts "You win!"
           puts "=============COMPUTER BOARD============="
           puts @computer_board.render
@@ -84,8 +86,10 @@ class Game
           welcome = Welcome.new
           welcome.main_menu
         elsif computer_board.cells[guess].empty? == true
+          puts `clear`
           puts "Your shot on #{guess} was a miss."
         elsif computer_board.cells[guess].empty? == false
+          puts `clear`
           puts "Your shot on #{guess} was a hit!"
           if computer_board.cells[guess].ship.health == 0 && computer_cruiser.sunk? == true
             puts "You sunk my cruiser!"
@@ -97,7 +101,7 @@ class Game
         computer_guess = computer_guesses.pop
         board.cells[computer_guess].fire_upon
         if (cruiser.sunk? && submarine.sunk?) == true
-          puts ""
+          puts `clear`
           puts "I win!"
           puts "=============COMPUTER BOARD============="
           puts @computer_board.render
@@ -106,6 +110,7 @@ class Game
           puts ""
           welcome = Welcome.new
           welcome.main_menu
+         
         elsif board.cells[computer_guess].empty? == true
           puts "My shot on #{computer_guess} was a miss."
         elsif board.cells[computer_guess].empty? == false
