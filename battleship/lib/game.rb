@@ -55,7 +55,7 @@ class Game
       squares_submarine = gets.chomp.upcase.split(' ')
     end
     board.place(submarine, squares_submarine)
-
+    puts `clear`
       def turn
         puts "=============COMPUTER BOARD============="
         puts @computer_board.render
@@ -64,45 +64,62 @@ class Game
         puts ""
         puts "Enter the coordinate for your shot:"
         guess = gets.chomp.upcase
-        # require 'pry'; binding.pry
-        # computer_board.cells.values.each do |value|
-          # require 'pry'; binding.pry
           if computer_board.cells.keys.include?(guess) == false
+            puts `clear`
             puts "Invalid choice. Try again"
             turn
           elsif computer_board.cells[guess].fired_upon == true
+            puts `clear`
             puts "You have already fired on that cell. Try again"
             turn
           end
-        # end
+
         computer_board.cells[guess].fire_upon
         if (computer_cruiser.sunk? && computer_submarine.sunk?) == true
+          puts `clear`
           puts "You win!"
+          puts "=============COMPUTER BOARD============="
+          puts @computer_board.render
+          puts "==============PLAYER BOARD=============="
+          puts board.render(true)
+          puts ""
           welcome = Welcome.new
           welcome.main_menu
-        elsif computer_cruiser.sunk? == true
-          puts "You sunk my cruiser!"
-        elsif computer_submarine.sunk? == true
-          puts "You sunk my submarine!"
-        elsif computer_board.cells[guess].empty? == false
-          puts "Your shot on #{guess} was a hit!"
         elsif computer_board.cells[guess].empty? == true
+          puts `clear`
           puts "Your shot on #{guess} was a miss."
+        elsif computer_board.cells[guess].empty? == false
+          puts `clear`
+          puts "Your shot on #{guess} was a hit!"
+          if computer_board.cells[guess].ship.health == 0 && computer_cruiser.sunk? == true
+            puts "You sunk my cruiser!"
+          elsif computer_board.cells[guess].ship.health == 0 && computer_submarine.sunk? == true
+          puts "You sunk my submarine!"
+          end
         end
 
-        board.cells[computer_guesses.pop].fire_upon
+        computer_guess = computer_guesses.pop
+        board.cells[computer_guess].fire_upon
         if (cruiser.sunk? && submarine.sunk?) == true
+          puts `clear`
           puts "I win!"
+          puts "=============COMPUTER BOARD============="
+          puts @computer_board.render
+          puts "==============PLAYER BOARD=============="
+          puts board.render(true)
+          puts ""
           welcome = Welcome.new
           welcome.main_menu
-        elsif cruiser.sunk? == true
-          puts "I sunk your cruiser!"
-        elsif submarine.sunk? == true
-          puts "I sunk your submarine!"
-        elsif board.cells[guess].empty? == false
-          puts "My shot on #{guess} was a hit!"
-        elsif board.cells[guess].empty? == true
-          puts "My shot on #{guess} was a miss."
+         
+        elsif board.cells[computer_guess].empty? == true
+          puts "My shot on #{computer_guess} was a miss."
+        elsif board.cells[computer_guess].empty? == false
+          puts "My shot on #{computer_guess} was a hit!"
+          if board.cells[computer_guess].ship.health == 0 && cruiser.sunk? == true
+              puts "I sunk your cruiser!"
+          elsif board.cells[computer_guess].ship.health == 0 && submarine.sunk? == true
+            puts "I sunk your submarine!"
+          end
         end
         turn
       end
