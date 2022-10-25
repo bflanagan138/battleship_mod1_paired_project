@@ -1,3 +1,11 @@
+require './lib/game'
+
+class Welcome
+  attr_reader :main_menu
+
+  def initialize
+    @main_menu = start
+  end
 
   def quit
     exit
@@ -19,4 +27,3 @@
     end
   end
 end
-
