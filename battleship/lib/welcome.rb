@@ -1,15 +1,3 @@
-require './lib/board'
-require './lib/cell'
-require './lib/ship'
-require './lib/game'
-require 'pry'
-
-class Welcome
-  attr_reader :main_menu
-
-  def initialize
-    @main_menu = start
-  end
 
   def quit
     exit
@@ -31,3 +19,4 @@ class Welcome
     end
   end
 end
+

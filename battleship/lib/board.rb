@@ -50,7 +50,7 @@ class Board
   def horizontal?(coordinates)
     if letter_same?(coordinates)
       coordinates.each_cons(2).all? do |coordinate|
-       coordinate[1][1].to_i - coordinate[0][1].to_i == 1
+        coordinate[1][1].to_i - coordinate[0][1].to_i == 1
       end
     elsif !letter_same?(coordinates)
       false
@@ -66,24 +66,15 @@ class Board
       false
     end
   end
+
   def horizontal_or_vertical?(coordinates)
      horizontal?(coordinates) || vertical?(coordinates)
   end
 
-  # def occupied?(coordinates)
-  #   if coordinates.map.all? do |coordinate|
-  #     @cells[coordinate].empty? == false
-  #     end
-  #     true
-  #   else false
-  #   end
-  # end
-
   def valid_placement?(ship, coordinates)
-    #if cell has a ship already false
     valid_coordinate?(coordinates) &&
     coordinates.each do |coordinate|
-       @cells.keys.include?(coordinate)
+      @cells.keys.include?(coordinate)
     end &&
     coordinates.map.all? {|coordinate| @cells[coordinate].empty?} &&
     horizontal_or_vertical?(coordinates) &&
@@ -91,23 +82,14 @@ class Board
     coordinate_order?(coordinates)
   end
 
-#place a ship across valid cells
-#cells are equal to cell coordinates
-# iterate through coordinates and check if those coordinates are
-# equal to a cells key. if a coordinate is equal to a key
-# place ship on that coordinate
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates)
-     coordinates.each {|coordinate| @cells[coordinate].place_ship(ship)}
+      coordinates.each {|coordinate| @cells[coordinate].place_ship(ship)}
     end
-   end
+  end
 
   def render(option = false)
-    #if ship is not equal to nil
-    # require 'pry'; binding.pry
-    # a_row_occupied = @cells.keys.find_all do |cell|
-    #   cell.ship != nil
-    # end
+
     a_row = @cells.keys.map do |cell|
       @cells[cell].render(option)
     end.slice(0..3)
@@ -115,18 +97,22 @@ class Board
     b_row = @cells.keys.map do |cell|
       @cells[cell].render(option)
     end.slice(4..7)
+
     c_row = @cells.keys.map do |cell|
       @cells[cell].render(option)
     end.slice(8..11)
+
     d_row = @cells.keys.map do |cell|
       @cells[cell].render(option)
     end.slice(12..15)
-    #a_array = [" .", " .", " .", " ." ]
+
     string_a = "A, \n"
     string_b = "B, \n"
     string_c = "C, \n"
     string_d = "D, \n"
-    "  1 2 3 4 \n" + "#{string_a.gsub(",", a_row.join)}" +
+
+    "  1 2 3 4 \n" +
+    "#{string_a.gsub(",", a_row.join)}" +
     "#{string_b.gsub(",", b_row.join)}" +
     "#{string_c.gsub(",", c_row.join)}" +
     "#{string_d.gsub(",", d_row.join)}"
