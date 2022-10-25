@@ -3,7 +3,6 @@ require './lib/cell'
 require './lib/ship'
 
 class Game
-
   attr_reader :board,
               :cruiser,
               :submarine,
@@ -12,10 +11,7 @@ class Game
               :computer_submarine,
               :computer_guesses
 
-
-
   def initialize
-    # welcome = Welcome.new
     @board = Board.new
     @cruiser = Ship.new(cruiser, 3)
     @submarine = Ship.new(submarine, 2)
@@ -26,8 +22,6 @@ class Game
   end
 
   def start_game
-    #computer
-
       computer_cruiser_cells = computer_guesses.shuffle.slice(0..2)
       while computer_board.valid_placement?(computer_cruiser, computer_cruiser_cells) == false
         computer_cruiser_cells = computer_guesses.shuffle.slice(0..2)
@@ -70,25 +64,32 @@ class Game
         puts ""
         puts "Enter the coordinate for your shot:"
         guess = gets.chomp.upcase
-        #require 'pry'; binding.pry
+        # require 'pry'; binding.pry
+        # computer_board.cells.values.each do |value|
+          # require 'pry'; binding.pry
+          if computer_board.cells.keys.include?(guess) == false
+            puts "Invalid choice. Try again"
+            turn
+          elsif computer_board.cells[guess].fired_upon == true
+            puts "You have already fired on that cell. Try again"
+            turn
+          end
+        # end
         computer_board.cells[guess].fire_upon
 
         if (computer_cruiser.sunk? && computer_submarine.sunk?) == true
-          # gameover.player_won
           puts "You win!"
           welcome = Welcome.new
           welcome.main_menu
         end
         board.cells[computer_guesses.pop].fire_upon
         if (cruiser.sunk? && submarine.sunk?) == true
-          # gameover.computer_won
           puts "I win!"
           welcome = Welcome.new
           welcome.main_menu
         end
         turn
       end
-      # turn = Turn.new(guess)
       turn
   end
 end
