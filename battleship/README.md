@@ -1,1 +1,1 @@
-battleship_mod1_paired_project
+# Welcome to Battleship! To start game, type <ruby battleship_runner.rb> into your terminal
